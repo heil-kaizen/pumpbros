@@ -455,7 +455,7 @@ export class Game {
 
     if (this.mode === 'ONLINE') {
         const myIndex = network.playerIndex;
-        const DELAY = 4; // 4 frames input delay (~66ms)
+        const DELAY = 10; // 10 frames input delay (~166ms)
 
         const currentIntent = humanIntent(CONTROLS.p1);
         if (!this.accumulatedIntent) this.accumulatedIntent = frozenIntent();
@@ -901,6 +901,15 @@ export class Game {
         const sx = isP1 ? (x + 10 + s * 16) : (x + boxW - 20 - s * 16);
         ctx.fillText('♥', sx, y + 54);
       }
+    }
+
+    // Ping Meter
+    if (this.mode === 'ONLINE') {
+      const ping = network.ping || 0;
+      ctx.textAlign = 'right';
+      ctx.fillStyle = ping < 100 ? '#2ed573' : (ping < 200 ? '#ffa502' : '#ff4757');
+      ctx.font = 'bold 16px monospace';
+      ctx.fillText(`${ping} ms`, GAME.WIDTH - 10, 20);
     }
   }
 
