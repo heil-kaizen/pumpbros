@@ -29,7 +29,9 @@ const activeRooms = new Map();
 
 export function initSocket(server) {
   const io = new Server(server, {
-    cors: { origin: '*' }
+    cors: { origin: '*' },
+    transports: ['websocket'],
+    allowEIO3: false
   });
 
   // Authentication Middleware
@@ -59,6 +61,10 @@ export function initSocket(server) {
 
   io.on('connection', async (socket) => {
     console.log(`[Socket] Connected: ${socket.user.address} (${socket.id})`);
+
+    socket.on('ping_server', (timestamp) => {
+      socket.emit('pong_client', timestamp);
+    });
 
     // Fetch and sync owned characters
     try {
