@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+@theme {
+  --color-on-primary-fixed-variant: #052e00;
+  --color-outline-variant: #c3d6bb;
+  --color-primary-container: #8cfb7a;
+  --color-on-surface-variant: #424e3c;
+  --color-tertiary-fixed: #c9e6ff;
+  --color-secondary-fixed: #ffe16d;
+  --color-surface-container-lowest: #ffffff;
+  --color-inverse-primary: #85eb66;
+  --color-primary-fixed-dim: #79ff5b;
+  --color-on-secondary-container: #221b00;
+  --color-on-tertiary-container: #001e2f;
+  --color-on-secondary-fixed-variant: #544600;
+  --color-tertiary-container: #c9e6ff;
+  --color-inverse-on-surface: #f1f0ef;
+  --color-outline: #727e6a;
+  --color-tertiary-fixed-dim: #8aceff;
+  --color-on-secondary-fixed: #221b00;
+  --color-surface-container: #f3f4f6;
+  --color-on-error-container: #410002;
+  --color-primary: #1e8f00;
+  --color-on-primary-fixed: #022100;
+  --color-surface-dim: #dadddd;
+  --color-secondary: #eab308;
+  --color-surface-tint: #1e8f00;
+  --color-error-container: #ffdad6;
+  --color-secondary-fixed-dim: #e9c400;
+  --color-tertiary: #00608c;
+  --color-surface-container-highest: #e5e7eb;
+  --color-error: #ba1a1a;
+  --color-secondary-container: #fde047;
+  --color-on-background: #1a1c19;
+  --color-inverse-surface: #2e312e;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #072100;
+  --color-primary-fixed: #9aff81;
+  --color-surface: #f8fafc;
+  --color-on-tertiary-fixed: #001e2f;
+  --color-background: #f8fafc;
+  --color-surface-container-high: #e2e8f0;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-fixed-variant: #004b6f;
+  --color-on-secondary: #ffffff;
+  --color-surface-container-low: #f8fafc;
+  --color-on-error: #ffffff;
+  --color-surface-bright: #f8fafc;
+  --color-on-surface: #1a1c19;
+  --color-surface-variant: #e2e3de;
+
+  --font-body-md: "Courier Prime", monospace;
+  --font-label-sm: "Courier Prime", monospace;
+  --font-headline-md: "Anybody", sans-serif;
+  --font-body-lg: "Courier Prime", monospace;
+  --font-headline-lg: "Anybody", sans-serif;
+  --font-pixel: "Press Start 2P", cursive;
+}
+
+@layer utilities {
+  .pixel-text-shadow {
+    text-shadow: 4px 4px 0px #000;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+.crt-frame {
+  position: absolute;
+  inset: 0;
+  background-color: #111;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 10px);
+  background-size: 20px 20px, 100% 100%;
+  box-shadow: inset 0 0 120px rgba(0,0,0,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.crt-screen {
+  position: relative;
+  background: #2a2a2a;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,1);
+}
+
+@media (aspect-ratio > 16/9) {
+  .crt-screen {
+    height: 94vh;
+    width: calc(94vh * 16 / 9);
+  }
+}
+@media (aspect-ratio <= 16/9) {
+  .crt-screen {
+    width: 96vw;
+    height: calc(96vw * 9 / 16);
+  }
+}
+
+.scanlines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 100, 0.03));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.vignette {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 11;
+}
+
+.cartridge-btn {
+  background: #555;
+  border: 3px solid #333;
+  box-shadow: inset 0 2px 0 #777, 0 4px 0 #000;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+.cartridge-btn:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 0 #777, 0 2px 0 #000;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.blink { animation: blink 1s infinite; }
+
+.game-canvas {
+  image-rendering: pixelated;
+  outline: none;
+}
+
+/* =========================================================================
+   WALLET MODAL
+   ========================================================================= */
+
+.wallet-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.wallet-modal.hidden {
+  display: none;
+}
+
+.wallet-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.80);
+  backdrop-filter: blur(4px);
+}
+
+.wallet-modal-content {
+  position: relative;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  border: 3px solid #fbbf24;
+  border-radius: 4px;
+  width: 340px;
+  max-height: 420px;
+  box-shadow:
+    0 0 30px rgba(251, 191, 36, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  font-family: "Courier Prime", monospace;
+  overflow: hidden;
+  animation: walletModalIn 0.25s ease-out;
+}
+
+@keyframes walletModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.wallet-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  border-bottom: 2px solid rgba(251, 191, 36, 0.25);
+}
+
+.wallet-modal-title {
+  color: #fbbf24;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+.wallet-modal-close {
+  background: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #94a3b8;
+  font-size: 22px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  font-family: monospace;
+  line-height: 1;
+  padding: 0;
+}
+
+.wallet-modal-close:hover {
+  color: #ffffff;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.wallet-list {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.wallet-list-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: "Courier Prime", monospace;
+}
+
+.wallet-list-item:hover {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.1);
+  transform: translateX(3px);
+}
+
+.wallet-list-item:active {
+  transform: translateX(3px) scale(0.98);
+}
+
+.wallet-list-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 4px;
+}
+
+.wallet-list-item-name {
+  color: #e2e8f0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.wallet-list-item-status {
+  margin-left: auto;
+  color: #4ade80;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.wallet-no-wallets {
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.wallet-no-wallets.hidden {
+  display: none;
+}
+
+.wallet-no-wallets p {
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0 0 16px;
+}
+
+.wallet-install-link {
+  display: inline-block;
+  color: #fbbf24;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #fbbf24;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  font-family: "Courier Prime", monospace;
+}
+
+.wallet-install-link:hover {
+  background: rgba(251, 191, 36, 0.15);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.wallet-modal-footer {
+  padding: 10px 20px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.wallet-network-badge {
+  display: inline-block;
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 2px;
+  background: rgba(56, 189, 248, 0.06);
+}
+
+/* Custom Scrollbar for Pixel Modals */
+#leaderboard-list::-webkit-scrollbar, .modal-body::-webkit-scrollbar { width: 12px; }
+#leaderboard-list::-webkit-scrollbar-track, .modal-body::-webkit-scrollbar-track { background: #f5d061; border: 2px solid #6b4c2a; border-right: none; border-top: none; border-bottom: none; }
+#leaderboard-list::-webkit-scrollbar-thumb, .modal-body::-webkit-scrollbar-thumb { background: #c29d38; border: 2px solid #6b4c2a; }

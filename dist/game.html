@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/webp" href="/assets/pumpbros-logo.webp">
+  <title>PUMPBROS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Anybody:wght@700;800&family=Press+Start+2P&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script type="module" crossorigin src="/assets/game-C_2VlBz2.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/wallet-BFGDk0Bc.js">
+  <link rel="stylesheet" crossorigin href="/assets/styles-Bi-wk0zq.css">
+</head>
+<body class="bg-[#111] h-screen w-screen m-0 p-0 flex items-center justify-center overflow-hidden font-body-md text-white">
+  <main class="w-full h-full flex justify-center items-center">
+    <div class="crt-frame">
+      <div class="crt-screen relative bg-sky-200">
+        <!-- Scanlines & Vignette Layer -->
+        <div class="scanlines"></div>
+        <div class="vignette"></div>
+
+        <!-- The actual game canvas -->
+        <div class="absolute inset-0 flex flex-col justify-between p-0 m-0 z-0 bg-sky-200">
+          <canvas id="game" width="960" height="540" class="w-full h-full game-canvas"></canvas>
+        </div>
+
+        <!-- Wallet Selection Modal Overlay -->
+        <div id="wallet-modal" class="wallet-modal hidden">
+          <div class="wallet-modal-backdrop"></div>
+          <div class="wallet-modal-content">
+            <div class="wallet-modal-header">
+              <span class="wallet-modal-title">SELECT WALLET</span>
+              <button id="wallet-modal-close" class="wallet-modal-close">&times;</button>
+            </div>
+            <div id="wallet-list" class="wallet-list">
+              <!-- Populated dynamically by wallet.js -->
+            </div>
+            <div id="wallet-no-wallets" class="wallet-no-wallets hidden">
+              <p>NO WALLETS DETECTED</p>
+              <a href="https://phantom.app/" target="_blank" rel="noopener" class="wallet-install-link">
+                ▸ INSTALL PHANTOM
+              </a>
+            </div>
+            <div class="wallet-modal-footer">
+              <span class="wallet-network-badge" id="wallet-network-badge">DEVNET</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- HUD Buttons Overlay -->
+        <div id="hud-container" class="absolute left-6 top-6 flex flex-col gap-4 z-10" style="display: none;">
+          <button id="btn-leaderboard" class="hud-btn hover:-translate-y-1 active:translate-y-1 transition-transform flex items-center justify-center w-16 h-16 cursor-pointer relative font-pixel" style="background-color: #fca503; border: 4px solid #000; box-shadow: inset -4px -4px 0px 0px #b55a00, inset 4px 4px 0px 0px #fce079, 0 4px 0 0 rgba(0,0,0,0.5); outline: none;">
+            <div class="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <div class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <div class="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <div class="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <span class="material-symbols-outlined" style="color: #fca503; font-size: 32px; padding-top: 2px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -2px 0 0 #000, 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, 2px 4px 0 #000, 0 4px 0 #000;">emoji_events</span>
+          </button>
+          <button id="btn-help" class="hud-btn hover:-translate-y-1 active:translate-y-1 transition-transform flex items-center justify-center w-16 h-16 cursor-pointer relative font-pixel" style="background-color: #fca503; border: 4px solid #000; box-shadow: inset -4px -4px 0px 0px #b55a00, inset 4px 4px 0px 0px #fce079, 0 4px 0 0 rgba(0,0,0,0.5); outline: none;">
+            <div class="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <div class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <div class="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <div class="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-[#b55a00]"></div>
+            <span style="color: #fca503; font-size: 28px; padding-top: 4px; padding-left: 2px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -2px 0 0 #000, 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, 2px 4px 0 #000, 0 4px 0 #000;">?</span>
+          </button>
+        </div>
+
+        <!-- Leaderboard Modal Overlay -->
+        <div id="leaderboard-modal" class="ui-modal hidden absolute inset-0 z-50 flex items-center justify-center">
+          <div class="ui-modal-backdrop absolute inset-0 bg-black/50"></div>
+          <div class="ui-modal-content pixel-modal leaderboard-bg relative z-10 w-[500px] bg-[#fef0cd] border-[6px] border-[#6b4c2a] p-4 font-pixel text-[#4a3f2d]">
+            <div class="modal-header flex justify-between items-center mb-4">
+              <span class="modal-title text-xl font-bold text-[#567a1b]">Top Fighters</span>
+              <button id="leaderboard-close" class="modal-close-btn bg-[#ef4444] border-[4px] border-[#991b1b] w-8 h-8 flex items-center justify-center font-bold font-pixel text-white shadow-[2px_2px_0_0_#991b1b] active:shadow-none active:translate-y-[2px] active:translate-x-[2px]">X</button>
+            </div>
+
+            <div class="leaderboard-tabs flex gap-2 mb-4">
+              <button id="tab-local" class="pixel-tab bg-[#f5d061] border-[4px] border-[#6b4c2a] px-3 py-1 font-bold text-[#4a3f2d] shadow-[2px_2px_0_0_#4a3f2d] active:translate-y-[2px] active:translate-x-[2px] active:shadow-none opacity-100 transition-opacity">Local Wins</button>
+              <button id="tab-online" class="pixel-tab bg-[#f5d061] border-[4px] border-[#6b4c2a] px-3 py-1 font-bold text-[#4a3f2d] shadow-[2px_2px_0_0_#4a3f2d] active:translate-y-[2px] active:translate-x-[2px] active:shadow-none opacity-50 transition-opacity">Online Winnings</button>
+            </div>
+            <div id="leaderboard-list" class="flex flex-col overflow-y-auto h-[320px] pr-2">
+              <!-- JS populates this -->
+              <div class="text-center py-10">Loading...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Help Modal Overlay -->
+        <div id="help-modal" class="ui-modal hidden absolute inset-0 z-50 flex items-center justify-center">
+          <div class="ui-modal-backdrop absolute inset-0 bg-black/50"></div>
+          <div class="ui-modal-content pixel-modal relative z-10 w-[500px] bg-[#fef0cd] border-[6px] border-[#6b4c2a] p-4 font-pixel text-[#4a3f2d]">
+            <div class="modal-header flex justify-between items-center mb-4">
+              <span class="modal-title text-xl font-bold text-[#567a1b]">How To Play</span>
+              <button id="help-close" class="modal-close-btn bg-[#ef4444] border-[4px] border-[#991b1b] w-8 h-8 flex items-center justify-center font-bold font-pixel text-white shadow-[2px_2px_0_0_#991b1b] active:shadow-none active:translate-y-[2px] active:translate-x-[2px]">X</button>
+            </div>
+            <div class="modal-body text-sm font-body-md leading-relaxed h-[300px] overflow-y-auto pr-2 flex flex-col gap-4">
+              <div class="bg-white/50 p-3 border-[4px] border-[#e2d3ab]">
+                <h3 class="font-bold font-pixel mb-2 text-[#6b4c2a]">Controls (P1)</h3>
+                <ul class="list-disc pl-5">
+                  <li><strong>WASD</strong>: Move / Jump / Crouch</li>
+                  <li><strong>J</strong>: Light Attack</li>
+                  <li><strong>K</strong>: Heavy Attack</li>
+                  <li><strong>L</strong>: Special Attack</li>
+                  <li><strong>I</strong>: Shield / Dodge</li>
+                </ul>
+              </div>
+              <div class="bg-white/50 p-3 border-[4px] border-[#e2d3ab]">
+                <h3 class="font-bold font-pixel mb-2 text-[#6b4c2a]">Mechanics</h3>
+                <p>Lower your opponent's health to 0 to take their stock. First to lose all 3 stocks loses the match.</p>
+                <p class="mt-2">In ONLINE mode, lock in your Wager using SOL. Winning takes the pot!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- CRT Physical Details -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-12 items-center opacity-30 pointer-events-none">
+          <div class="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_red]"></div>
+          <div class="flex gap-4">
+              <div class="w-8 h-1 bg-white/20"></div>
+              <div class="w-8 h-1 bg-white/20"></div>
+              <div class="w-8 h-1 bg-white/20"></div>
+          </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

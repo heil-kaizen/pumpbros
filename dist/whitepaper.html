@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/webp" href="/assets/pumpbros-logo.webp">
+  <title>PUMPBROS - Whitepaper</title>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Anybody:wght@700;800&family=Press+Start+2P&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    .wp-section { margin-bottom: 2.5rem; }
+    .wp-h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; border-bottom: 4px solid #facc15; display: inline-block; text-transform: uppercase; }
+    .wp-h3 { font-size: 1.25rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #b45309; }
+    .wp-p { line-height: 1.75; margin-bottom: 1rem; }
+    .wp-ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+    .wp-ul li { margin-bottom: 0.5rem; }
+    .wp-pre { background-color: #3c2a19; color: #fdf8e6; padding: 1rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.875rem; margin-bottom: 1rem; white-space: pre-wrap; }
+  </style>
+  <link rel="stylesheet" crossorigin href="/assets/styles-Bi-wk0zq.css">
+</head>
+<body class="bg-sky-200 min-h-screen w-full m-0 p-0 font-body-md text-[#543b23] overflow-x-hidden">
+  
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full p-6 flex justify-between items-center z-50 bg-sky-200/90 backdrop-blur-sm border-b-4 border-[#543b23]">
+    <div class="text-2xl font-pixel text-yellow-400 pixel-text-shadow tracking-widest cursor-pointer" onclick="window.location.href='/'">
+      PUMPBROS
+    </div>
+    <div class="flex gap-8 text-sm font-bold tracking-widest text-[#3c5423]">
+      <a href="/" class="hover:text-[#1d5246] hover:-translate-y-1 transition-all">HOME</a>
+      <a href="/auth.html" class="px-6 py-2 bg-yellow-400 text-yellow-900 border-4 border-yellow-600 rounded-lg hover:bg-yellow-300 hover:scale-105 transition-all shadow-[4px_4px_0_#b45309]">
+        PLAY NOW
+      </a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="pt-32 pb-20 px-4 md:px-8 max-w-4xl mx-auto">
+    <div class="bg-[#fdf8e6] border-8 border-[#543b23] p-6 md:p-12 shadow-[12px_12px_0_#b45309]">
+      <h1 class="text-3xl md:text-5xl font-pixel text-[#543b23] mb-4 text-center tracking-widest leading-tight">
+        PumpBros Whitepaper
+      </h1>
+      <p class="text-center font-bold text-yellow-600 mb-12 tracking-widest">(Draft v1.0)</p>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Abstract</h2>
+        <p class="wp-p">PumpBros is a browser-based 2D fighting game that combines competitive gameplay, wallet-gated access, online PvP battles, and community-driven rewards. Built on the Solana ecosystem, PumpBros allows eligible token holders to access the game, compete against AI or other players, unlock fighters through an in-game store, and participate in a transparent reward economy.</p>
+        <p class="wp-p">The project focuses on creating a fun competitive game first, while using blockchain technology only where it adds meaningful value: identity, ownership, rewards, and wager verification.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Vision</h2>
+        <p class="wp-p">Most blockchain games fail because they prioritize speculation over gameplay.</p>
+        <p class="wp-p">PumpBros follows a different approach:</p>
+        <pre class="wp-pre">Gameplay First
+Blockchain Second</pre>
+        <p class="wp-p">The objective is to build a genuinely enjoyable fighting game where blockchain infrastructure enhances the player experience rather than replacing it.</p>
+        <p class="wp-p">Players should want to play because the game is fun. Rewards, ownership, and competition are additional layers that increase engagement.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Core Principles</h2>
+        <h3 class="wp-h3">Gameplay First</h3>
+        <p class="wp-p">The fighting game experience remains the primary focus.</p>
+        <h3 class="wp-h3">Fair Competition</h3>
+        <p class="wp-p">Skill should be rewarded more than spending power.</p>
+        <h3 class="wp-h3">Transparent Rewards</h3>
+        <p class="wp-p">Reward distributions and leaderboard calculations will be public and verifiable.</p>
+        <h3 class="wp-h3">Accessible Ownership</h3>
+        <p class="wp-p">Players can unlock characters without requiring NFTs.</p>
+        <h3 class="wp-h3">Community Growth</h3>
+        <p class="wp-p">Long-term rewards are designed to encourage active participation rather than passive holding.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Platform Overview</h2>
+        <p class="wp-p">PumpBros is a browser-based game playable worldwide.</p>
+        <p class="wp-p">Supported devices:</p>
+        <ul class="wp-ul">
+          <li>Desktop browsers</li>
+          <li>Mobile browsers (future)</li>
+          <li>Web-enabled gaming devices (future)</li>
+        </ul>
+        <p class="wp-p">No installation is required.</p>
+        <p class="wp-p">Players connect a supported Solana wallet and immediately gain access to the ecosystem.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Wallet Integration</h2>
+        <p class="wp-p">Supported wallets:</p>
+        <ul class="wp-ul">
+          <li>Phantom</li>
+          <li>Solflare</li>
+          <li>Backpack</li>
+        </ul>
+        <p class="wp-p">Wallets serve as:</p>
+        <ul class="wp-ul">
+          <li>Authentication</li>
+          <li>Identity verification</li>
+          <li>Character ownership verification</li>
+          <li>Reward distribution destination</li>
+        </ul>
+        <p class="wp-p">The wallet address acts as the permanent player identifier.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Token Holder Access</h2>
+        <p class="wp-p">To participate, players must hold a minimum amount of the project's designated SPL token.</p>
+        <p class="wp-p">Example:</p>
+        <pre class="wp-pre">Minimum Requirement:
+100,000 Tokens</pre>
+        <p class="wp-p">Wallet eligibility is verified through blockchain data before access is granted.</p>
+        <p class="wp-p">This creates alignment between the game's player base and its supporting community.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Player Profiles</h2>
+        <p class="wp-p">Every player creates a profile after connecting a wallet.</p>
+        <p class="wp-p">Profile data includes:</p>
+        <ul class="wp-ul">
+          <li>Username</li>
+          <li>Wallet address</li>
+          <li>PvP statistics</li>
+          <li>PvE statistics</li>
+          <li>Character ownership</li>
+          <li>Seasonal rankings</li>
+        </ul>
+        <p class="wp-p">The wallet remains the source of truth for player identity.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Game Modes</h2>
+        <h3 class="wp-h3">Player vs CPU</h3>
+        <p class="wp-p">Single-player mode allows users to practice and compete for leaderboard positions.</p>
+        <p class="wp-p">Features:</p>
+        <ul class="wp-ul">
+          <li>Multiple difficulty levels</li>
+          <li>Score tracking</li>
+          <li>Win streak tracking</li>
+          <li>Seasonal rankings</li>
+        </ul>
+        <h3 class="wp-h3">Online PvP</h3>
+        <p class="wp-p">Players compete against other players in real-time matches.</p>
+        <p class="wp-p">Features:</p>
+        <ul class="wp-ul">
+          <li>Matchmaking queues</li>
+          <li>Multiple wager brackets</li>
+          <li>Competitive rankings</li>
+          <li>Seasonal rewards</li>
+        </ul>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Matchmaking System</h2>
+        <p class="wp-p">Players choose a wager bracket before entering the queue.</p>
+        <p class="wp-p">Example brackets:</p>
+        <pre class="wp-pre">0.01 SOL
+0.10 SOL
+0.25 SOL
+0.40 SOL
+0.50 SOL</pre>
+        <p class="wp-p">Players selecting the same bracket are grouped into a matchmaking queue.</p>
+        <p class="wp-p">When two players are available:</p>
+        <pre class="wp-pre">Queue
+↓
+Match Found
+↓
+Room Created
+↓
+Fight Begins</pre>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Wager System</h2>
+        <p class="wp-p">Players may optionally participate in wager matches.</p>
+        <p class="wp-p">Workflow:</p>
+        <pre class="wp-pre">Choose Wager
+↓
+Approve Transaction
+↓
+Join Queue
+↓
+Fight
+↓
+Winner Receives Pot</pre>
+        <p class="wp-p">Only players with verified deposits may enter a wager queue.</p>
+        <p class="wp-p">This prevents abuse and fake matchmaking entries.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Character System</h2>
+        <p class="wp-p">PumpBros uses an unlockable character model.</p>
+        <p class="wp-p">Characters are:</p>
+        <ul class="wp-ul">
+          <li>Not NFTs</li>
+          <li>Not unique</li>
+          <li>Not supply-limited</li>
+        </ul>
+        <p class="wp-p">Any player may purchase and unlock available characters.</p>
+        <p class="wp-p">Ownership is recorded in the platform database and linked to the player's wallet.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Character Store</h2>
+        <p class="wp-p">Players can purchase new fighters using:</p>
+        <ul class="wp-ul">
+          <li>SOL</li>
+          <li>Project SPL Token</li>
+        </ul>
+        <p class="wp-p">Each fighter may support:</p>
+        <ul class="wp-ul">
+          <li>SOL only</li>
+          <li>Token only</li>
+          <li>Both payment methods</li>
+        </ul>
+        <p class="wp-p">Example:</p>
+        <pre class="wp-pre">Shadow Ninja
+
+0.25 SOL
+or
+50,000 Tokens</pre>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Character Ownership</h2>
+        <p class="wp-p">Ownership is stored per wallet.</p>
+        <p class="wp-p">Example:</p>
+        <pre class="wp-pre">Wallet A
+→ Shadow Ninja
+
+Wallet B
+→ Shadow Ninja
+
+Wallet C
+→ Shadow Ninja</pre>
+        <p class="wp-p">Multiple users may own the same fighter.</p>
+        <p class="wp-p">The goal is accessibility rather than scarcity.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Future Cosmetic System</h2>
+        <p class="wp-p">Future updates may introduce:</p>
+        <ul class="wp-ul">
+          <li>Skins</li>
+          <li>Seasonal cosmetics</li>
+          <li>Event-exclusive cosmetics</li>
+          <li>Leaderboard reward cosmetics</li>
+        </ul>
+        <p class="wp-p">Examples:</p>
+        <pre class="wp-pre">Gold Shadow Ninja
+Inferno Shadow Ninja
+Diamond Shadow Ninja</pre>
+        <p class="wp-p">These cosmetics may become a key progression and reward mechanism.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Leaderboards</h2>
+        <h3 class="wp-h3">PvE Leaderboard</h3>
+        <p class="wp-p">Based on:</p>
+        <ul class="wp-ul">
+          <li>Difficulty</li>
+          <li>Wins</li>
+          <li>Win streaks</li>
+          <li>Performance score</li>
+        </ul>
+        <h3 class="wp-h3">PvP Leaderboard</h3>
+        <p class="wp-p">Based on:</p>
+        <ul class="wp-ul">
+          <li>Wins</li>
+          <li>Losses</li>
+          <li>Win rate</li>
+          <li>Wager participation</li>
+        </ul>
+        <p class="wp-p">Top players will receive recognition and rewards.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Seasonal Competition</h2>
+        <p class="wp-p">Competition occurs in seasons.</p>
+        <p class="wp-p">Example:</p>
+        <pre class="wp-pre">30 Day Season</pre>
+        <p class="wp-p">At the end of each season:</p>
+        <ul class="wp-ul">
+          <li>Rankings reset</li>
+          <li>Rewards distributed</li>
+          <li>New competition begins</li>
+        </ul>
+        <p class="wp-p">This allows new players to remain competitive.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Reward Economy</h2>
+        <p class="wp-p">A portion of ecosystem revenue may be allocated to player rewards.</p>
+        <p class="wp-p">Potential reward sources:</p>
+        <ul class="wp-ul">
+          <li>Platform revenue</li>
+          <li>Ecosystem incentives</li>
+          <li>Sponsorships</li>
+          <li>Community treasury</li>
+        </ul>
+        <p class="wp-p">Example reward structure:</p>
+        <pre class="wp-pre">Rank #1: 5%
+Rank #2: 3%
+Rank #3: 2%
+Rank #4: 1%
+Rank #5: 1%</pre>
+        <p class="wp-p">Final percentages will be determined by governance and sustainability considerations.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Security</h2>
+        <p class="wp-p">PumpBros uses multiple layers of verification.</p>
+        <h3 class="wp-h3">Wallet Signature Authentication</h3>
+        <p class="wp-p">Players must prove ownership of their wallet.</p>
+        <h3 class="wp-h3">Token Gate Verification</h3>
+        <p class="wp-p">Token balances are validated before access.</p>
+        <h3 class="wp-h3">Transaction Verification</h3>
+        <p class="wp-p">Purchases and wagers are verified on-chain.</p>
+        <h3 class="wp-h3">Replay Protection</h3>
+        <p class="wp-p">Transaction signatures cannot be reused.</p>
+        <h3 class="wp-h3">Match Audit Records</h3>
+        <p class="wp-p">Every wager match is permanently recorded.</p>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Match Audit System</h2>
+        <p class="wp-p">Every wager match creates an immutable record.</p>
+        <p class="wp-p">Stored information includes:</p>
+        <ul class="wp-ul">
+          <li>Players</li>
+          <li>Wager amount</li>
+          <li>Deposit transactions</li>
+          <li>Winner</li>
+          <li>Payout transaction</li>
+        </ul>
+        <p class="wp-p">Benefits:</p>
+        <ul class="wp-ul">
+          <li>Transparency</li>
+          <li>Fraud prevention</li>
+          <li>Dispute resolution</li>
+          <li>Statistical analysis</li>
+        </ul>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Technical Architecture</h2>
+        <h3 class="wp-h3">Frontend</h3>
+        <pre class="wp-pre">Vite
+Vanilla JavaScript
+HTML5 Canvas</pre>
+        <h3 class="wp-h3">Backend</h3>
+        <pre class="wp-pre">Node.js
+Express
+Socket.io</pre>
+        <h3 class="wp-h3">Database</h3>
+        <pre class="wp-pre">Supabase PostgreSQL</pre>
+        <h3 class="wp-h3">Blockchain</h3>
+        <pre class="wp-pre">Solana
+Helius RPC
+@solana/web3.js</pre>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Roadmap</h2>
+        <ul class="wp-ul">
+          <li><strong>Phase 1:</strong> Wallet Connection</li>
+          <li><strong>Phase 2:</strong> Authentication & Token Gate</li>
+          <li><strong>Phase 2.5:</strong> Player Profiles</li>
+          <li><strong>Phase 3:</strong> Matchmaking Infrastructure</li>
+          <li><strong>Phase 4:</strong> Character Store & Ownership</li>
+          <li><strong>Phase 5:</strong> Real Wager Deposits</li>
+          <li><strong>Phase 6:</strong> Networked PvP Combat</li>
+          <li><strong>Phase 7:</strong> Match Resolution & Payouts</li>
+          <li><strong>Phase 8:</strong> Leaderboards & Match Auditing</li>
+          <li><strong>Phase 9:</strong> Seasonal Rewards</li>
+          <li><strong>Phase 10:</strong> Skins & Cosmetic System</li>
+          <li><strong>Phase 11:</strong> Marketplace (Optional)</li>
+          <li><strong>Phase 12:</strong> Admin Dashboard</li>
+          <li><strong>Phase 13:</strong> Production Hardening</li>
+        </ul>
+      </section>
+
+      <section class="wp-section">
+        <h2 class="wp-h2">Long-Term Goal</h2>
+        <p class="wp-p">PumpBros aims to become a competitive browser-native fighting game ecosystem where players can:</p>
+        <ul class="wp-ul">
+          <li>Compete</li>
+          <li>Progress</li>
+          <li>Collect</li>
+          <li>Earn</li>
+          <li>Build reputation</li>
+        </ul>
+        <p class="wp-p">while maintaining gameplay as the foundation of the experience.</p>
+        <p class="wp-p">The project's success will be measured not by speculation, but by the strength of its player community and the quality of its competitive gameplay.</p>
+      </section>
+      
+      <div class="mt-12 text-center">
+        <a href="/" class="inline-block px-8 py-3 bg-[#543b23] text-[#fdf8e6] font-bold tracking-widest rounded hover:bg-[#3c2a19] transition-colors border-2 border-[#fdf8e6]">
+          RETURN HOME
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#543b23] text-sky-200 py-8 text-center font-bold text-sm tracking-widest border-t-4 border-[#3c2a19]">
+    <p class="mb-2">© 2026 PUMPBROS. ALL RIGHTS RESERVED.</p>
+    <p class="opacity-70">BUILT ON SOLANA</p>
+  </footer>
+
+</body>
+</html>
