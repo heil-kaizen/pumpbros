@@ -20,13 +20,22 @@ export class NetworkManager {
 
     // Store State
     this.ownedCharacters = [];
+    
+    // Ping Meter
+    this.ping = 0;
+    setInterval(() => {
+      if (this.socket && this.socket.connected) {
+        this.socket.emit('ping_server', Date.now());
+      }
+    }, 1000);
   }
 
   connect() {
     if (this.socket) return;
     this.socket = io({ 
       path: '/socket.io',
-      withCredentials: true
+      withCredentials: true,
+      transports: ['websocket']
     });
 
     this.socket.on('connect', () => {
@@ -36,6 +45,10 @@ export class NetworkManager {
     this.socket.on('connect_error', (err) => {
       console.error('[Network] Connection Error:', err.message);
       if (this.onError) this.onError(err.message);
+    });
+
+    this.socket.on('pong_client', (timestamp) => {
+      this.ping = Date.now() - timestamp;
     });
 
     this.socket.on('match_found', (data) => {
