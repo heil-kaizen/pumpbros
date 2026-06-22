@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
 import { authRouter } from './auth.js';
 import { initSocket } from './socket.js';
-import { getLeaderboards, incrementLocalWins } from './supabase.js';
+import { getLeaderboards, incrementLocalWins, getGlobalStats } from './supabase.js';
 import jwt from 'jsonwebtoken';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,6 +48,16 @@ app.get('/api/leaderboards', async (req, res) => {
   } catch (err) {
     console.error('[API] getLeaderboards error:', err);
     res.status(500).json({ error: 'Failed to fetch leaderboards' });
+  }
+});
+
+app.get('/api/stats', async (req, res) => {
+  try {
+    const stats = await getGlobalStats();
+    res.json(stats);
+  } catch (err) {
+    console.error('[API] getGlobalStats error:', err);
+    res.status(500).json({ error: 'Failed to fetch global stats' });
   }
 });
 
