@@ -167,14 +167,18 @@ export async function getGlobalStats() {
       .from('users')
       .select('*', { count: 'exact', head: true });
 
-    // Get total battles (sum of local_wins as a proxy for battles fought)
+    // Get total battles (sum of both CPU and Online modes)
     const { data: winData, error: winErr } = await supabase
       .from('users')
-      .select('local_wins');
+      .select('local_wins, online_wins');
 
     let battles = 0;
     if (!winErr && winData) {
-      battles = winData.reduce((acc, user) => acc + (user.local_wins || 0), 0);
+      battles = winData.reduce((acc, user) => acc + (user.local_wins || 0) + (user.online_wins || 0), 0);
+    } else {
+      // Fallback in case the online_wins column doesn't exist in the database yet
+      const { data: fallbackData } = await supabase.from('users').select('local_wins');
+      if (fallbackData) battles = fallbackData.reduce((acc, user) => acc + (user.local_wins || 0), 0);
     }
 
     const avgSettleTime = 400;
