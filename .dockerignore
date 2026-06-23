@@ -1,0 +1,9 @@
+node_modules
+src
+public
+dist
+index.html
+vite.config.ts
+auth.html
+styles.css
+README.md
