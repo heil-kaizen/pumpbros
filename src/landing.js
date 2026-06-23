@@ -63,6 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     animateValue(entry.target);
                     observer.unobserve(entry.target);
                 }
+
+                // Animate any fill bars (Tokenomics, Fighter Stats, etc.)
+                const fills = entry.target.querySelectorAll('.fill[data-w]');
+                if (fills.length > 0) {
+                    setTimeout(() => {
+                        fills.forEach(fill => {
+                            fill.style.width = fill.getAttribute('data-w') + '%';
+                        });
+                    }, 150); // Small delay to let the fade-in start first
+                    // We don't unobserve the container immediately so if they scroll away and back it could re-trigger, 
+                    // but the 'in' class usually persists. We can leave it observed or unobserve it.
+                }
             }
         });
     }, observerOptions);
