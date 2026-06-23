@@ -389,33 +389,8 @@ footer{background:#16210f;color:#bcd3b0;border-top:6px solid var(--shadow);paddi
       <span class="spark" style="top:60px;right:2%;color:var(--red);animation-delay:-1s">★</span>
       <span class="spark floaty" style="top:120px;left:0;animation-delay:-.5s">$</span>
       <div class="mascot-wrap">
-        <!-- PUMP capsule mascot -->
-        <svg class="mascot" viewBox="0 0 64 80" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
-          <!-- cape -->
-          <g fill="#247a31"><rect x="10" y="22" width="44" height="40"/><rect x="6" y="30" width="6" height="26"/><rect x="52" y="30" width="6" height="26"/></g>
-          <g fill="#1c5e26"><rect x="10" y="56" width="8" height="8"/><rect x="26" y="56" width="8" height="10"/><rect x="44" y="56" width="8" height="8"/></g>
-          <!-- capsule head -->
-          <rect x="22" y="2" width="20" height="22" fill="#d8f3e0"/>
-          <rect x="22" y="13" width="20" height="11" fill="#3fa34d"/>
-          <rect x="24" y="4" width="4" height="8" fill="#ffffff"/>
-          <!-- face -->
-          <rect x="27" y="16" width="3" height="3" fill="#16210f"/>
-          <rect x="34" y="16" width="3" height="3" fill="#16210f"/>
-          <rect x="29" y="21" width="6" height="2" fill="#16210f"/>
-          <rect x="25" y="20" width="2" height="2" fill="#ff8da1"/><rect x="37" y="20" width="2" height="2" fill="#ff8da1"/>
-          <!-- body / muscles -->
-          <rect x="20" y="24" width="24" height="22" fill="#3fa34d"/>
-          <rect x="20" y="24" width="24" height="4" fill="#54c062"/>
-          <rect x="30" y="28" width="4" height="16" fill="#247a31"/>
-          <!-- arms -->
-          <rect x="8" y="26" width="12" height="10" fill="#3fa34d"/><rect x="6" y="24" width="8" height="14" fill="#54c062"/>
-          <rect x="44" y="26" width="12" height="10" fill="#3fa34d"/><rect x="50" y="24" width="8" height="14" fill="#54c062"/>
-          <!-- belt -->
-          <rect x="20" y="46" width="24" height="6" fill="#ffce1f"/><rect x="29" y="46" width="6" height="6" fill="#e8a400"/>
-          <!-- legs -->
-          <rect x="22" y="52" width="8" height="18" fill="#247a31"/><rect x="34" y="52" width="8" height="18" fill="#247a31"/>
-          <rect x="20" y="70" width="12" height="6" fill="#16210f"/><rect x="32" y="70" width="12" height="6" fill="#16210f"/>
-        </svg>
+        <!-- PUMP mascot image -->
+        <img class="mascot" src="/assets/Homepage.webp" alt="Pumpbros Mascot" style="image-rendering: pixelated;" />
       </div>
     </div>
   </div>
@@ -748,58 +723,7 @@ footer{background:#16210f;color:#bcd3b0;border-top:6px solid var(--shadow);paddi
 </footer>
 
 <!-- ===== JS ===== -->
-<script>
-(function(){
-  // mobile nav
-  var burger=document.getElementById('burger'),nav=document.getElementById('nav');
-  if(burger)burger.addEventListener('click',function(){nav.classList.toggle('open');});
-  nav&&nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');});});
-
-  // copy CA
-  var copy=document.getElementById('copyca'),ca=document.getElementById('ca');
-  if(copy)copy.addEventListener('click',function(){
-    var t=ca.textContent.trim();
-    navigator.clipboard&&navigator.clipboard.writeText(t);
-    var o=copy.textContent;copy.textContent='COPIED!';copy.style.background='#3fa34d';copy.style.color='#fff';
-    setTimeout(function(){copy.textContent=o;copy.style.background='';copy.style.color='';},1400);
-  });
-
-  // count-up
-  function countUp(el){
-    var target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||'0'),suf=el.dataset.suffix||'',start=null,dur=1600;
-    function step(ts){
-      if(!start)start=ts;var p=Math.min((ts-start)/dur,1);
-      var ease=1-Math.pow(1-p,3),val=target*ease;
-      el.textContent=(dec?val.toFixed(dec):Math.floor(val).toLocaleString())+suf;
-      if(p<1)requestAnimationFrame(step);else el.textContent=(dec?target.toFixed(dec):target.toLocaleString())+suf;
-    }
-    requestAnimationFrame(step);
-  }
-
-  // reveal + trigger animations
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting)return;
-      var el=e.target;el.classList.add('in');
-      // counters
-      el.querySelectorAll&&el.querySelectorAll('.num[data-count]').forEach(countUp);
-      if(el.classList.contains('num')&&el.dataset.count)countUp(el);
-      // bars
-      el.querySelectorAll&&el.querySelectorAll('.fill[data-w]').forEach(function(f){f.style.width=f.dataset.w+'%';});
-      io.unobserve(el);
-    });
-  },{threshold:.2});
-  document.querySelectorAll('.reveal,.fill[data-w]').forEach(function(el){io.observe(el);});
-
-  // FAQ accordion
-  document.querySelectorAll('.q button').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var q=btn.parentElement,open=q.classList.contains('open');
-      document.querySelectorAll('.q').forEach(function(x){x.classList.remove('open');});
-      if(!open)q.classList.add('open');
-    });
-  });
-})();
-</script>
+<script type="module" src="/src/landing.js"></script>
 </body>
 </html>
+
