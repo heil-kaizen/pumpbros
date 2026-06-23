@@ -27,6 +27,10 @@ const queues = {
 // Map of roomId -> { players: [{ socket, user, character }], bracket }
 const activeRooms = new Map();
 
+export function getActivePlayersCount() {
+  return activeRooms.size * 2;
+}
+
 export function initSocket(server) {
   const io = new Server(server, {
     cors: { origin: '*' },
