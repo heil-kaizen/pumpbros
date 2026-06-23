@@ -159,7 +159,7 @@ export async function getLeaderboards() {
 }
 
 export async function getGlobalStats() {
-  if (!supabase) return { battles: 148273, players: 12480, prizePool: 2.4, avgSettleTime: 400 };
+  if (!supabase) return { battles: 0, players: 0, prizePool: 0, avgSettleTime: 400 };
 
   try {
     // Get count of players
@@ -172,25 +172,21 @@ export async function getGlobalStats() {
       .from('users')
       .select('local_wins');
 
-    let battles = 148273; // fallback base
+    let battles = 0;
     if (!winErr && winData) {
       battles = winData.reduce((acc, user) => acc + (user.local_wins || 0), 0);
-      // to make it look big if the DB is empty
-      if (battles < 1000) battles += 148000; 
     }
 
-    // Default static or calculated stats for others
-    const prizePool = 2.4;
     const avgSettleTime = 400;
 
     return { 
       battles: battles, 
-      players: players > 1000 ? players : players + 12000, // pad numbers if it's a new db
-      prizePool: prizePool, 
+      players: players || 0, 
+      prizePool: 0, 
       avgSettleTime: avgSettleTime 
     };
   } catch (err) {
     console.error('[Supabase] getGlobalStats error:', err);
-    return { battles: 148273, players: 12480, prizePool: 2.4, avgSettleTime: 400 };
+    return { battles: 0, players: 0, prizePool: 0, avgSettleTime: 400 };
   }
 }
