@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
 import { authRouter } from './auth.js';
-import { initSocket } from './socket.js';
+import { initSocket, getActivePlayersCount } from './socket.js';
 import { getLeaderboards, incrementLocalWins, getGlobalStats } from './supabase.js';
 import jwt from 'jsonwebtoken';
 const __filename = fileURLToPath(import.meta.url);
@@ -54,6 +54,7 @@ app.get('/api/leaderboards', async (req, res) => {
 app.get('/api/stats', async (req, res) => {
   try {
     const stats = await getGlobalStats();
+    stats.players = getActivePlayersCount(); // Use real-time active battling players
     res.json(stats);
   } catch (err) {
     console.error('[API] getGlobalStats error:', err);
