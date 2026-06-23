@@ -455,7 +455,7 @@ export class Game {
 
     if (this.mode === 'ONLINE') {
         const myIndex = network.playerIndex;
-        const DELAY = 10; // 10 frames input delay (~166ms)
+        const DELAY = 6; // 6 frames input delay (~100ms)
 
         const currentIntent = humanIntent(CONTROLS.p1);
         if (!this.accumulatedIntent) this.accumulatedIntent = frozenIntent();
